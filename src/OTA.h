@@ -1,13 +1,12 @@
 /*
-   Write for pack lib AVOCADO_esp:
-   https://github.com/Ni3nayka/AVOCADO_esp
+   Write for wifi_boot_esp lib:
+   https://github.com/Ni3nayka/wifi_boot_esp
 
-   manual:
+   link:
    https://wikihandbk.com/wiki/ESP8266:Примеры/Прошивка_ESP8266_методом_OTA
 
-   install python 2.7.7:
+   python 2.7.7:
    https://www.python.org/downloads/release/python-277/
-   or instal from lib folder
 
    author: Egor Bakay <egor_bakay@inbox.ru>
    write:  november 2022
@@ -15,6 +14,8 @@
 */
 
 #pragma once
+
+#ifdef ENABLE_AVOCADO_ESP_WIFI_BOOT
 
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
@@ -24,14 +25,14 @@
 class OTA {
   public:
   
-    void setup();
-    void update();
+    void OTA_setup();
+    void OTA_update();
     
   private:
     
 };
 
-void OTA::setup() {
+void OTA::OTA_setup() {
   Serial.println("Booting");
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_NAME, WIFI_PASSWORD);
@@ -93,6 +94,10 @@ void OTA::setup() {
   Serial.println(WiFi.localIP());  
 }
 
-void OTA::update() {
+void OTA::OTA_update() {
   ArduinoOTA.handle();
 }
+
+#else
+class OTA {};
+#endif
