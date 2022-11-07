@@ -1,0 +1,20 @@
+################### lib colors ###################
+
+####### KEYWORD1 – big orange - data types #######
+
+OTA                  KEYWORD1
+wifi_boot_esp        KEYWORD1
+
+### KEYWORD2 – orange - methods and functions ####
+
+setup                KEYWORD2
+update               KEYWORD2
+
+########### LITERAL1 – blue - constant ###########
+
+WIFI_NAME            LITERAL1
+WIFI_PASSWORD        LITERAL1
+DEVICE_NAME          LITERAL1
+DEVICE_PASSWORD      LITERAL1
+
+
