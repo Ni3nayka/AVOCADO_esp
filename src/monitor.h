@@ -43,10 +43,8 @@ class AVOCADO_monitor: public AVOCADO_gamepad_translater {
 
   private:
 
-    #ifdef ENABLE_AVOCADO_ESP_WIFI_MONITOR
     String monitor_input_data;
     String send_message;
-    #endif
     
 };
 
@@ -74,14 +72,17 @@ void AVOCADO_monitor::monitor_update() {
   }
   
   while (client.available()) {
-   String last_input_data = client.readStringUntil('\n') + '\n';
+    String last_input_data = client.readStringUntil('\n') + '\n';
+    bool it_is_gamepad_data = 0;
+
+    #ifdef ENABLE_AVOCADO_ESP_WIFI_GAMEPAD
+    it_is_gamepad_data = gamepad_update_data(last_input_data);
+    #endif
 
     #ifdef ENABLE_AVOCADO_ESP_WIFI_MONITOR
-    monitor_input_data += last_input_data;
-    #endif
-    
-    #ifdef ENABLE_AVOCADO_ESP_WIFI_GAMEPAD
-    gamepad_update_data(last_input_data);
+    if (!it_is_gamepad_data) {
+      monitor_input_data += last_input_data;
+    }
     #endif
   }
 

@@ -26,7 +26,7 @@ class AVOCADO_gamepad_translater {
     bool gamepad_button[GAMEPAD_BUTTON_QUANTITY];
     int gamepad_arrow[GAMEPAD_ARROW_QUANTITY];
     
-    void gamepad_update_data(String input_data);
+    bool gamepad_update_data(String input_data);
     void gamepad_clear_arrays();
 
   private:
@@ -52,7 +52,7 @@ void AVOCADO_gamepad_translater::gamepad_clear_arrays() {
   for (int i = 0; i<GAMEPAD_ARROW_QUANTITY; i++) gamepad_arrow[i] = 0;
 }
 
-void AVOCADO_gamepad_translater::gamepad_update_data(String input_data) {
+bool AVOCADO_gamepad_translater::gamepad_update_data(String input_data) {
   // AVOCADO_gamepad_esp8266_nodeMCU::gamepad_clear_arrays();
   
   int flag = 0;
@@ -95,6 +95,7 @@ void AVOCADO_gamepad_translater::gamepad_update_data(String input_data) {
      int val = myString.toInt();
      // val теперь 10500
    */
+   return flag>0;
 }
 
 #else

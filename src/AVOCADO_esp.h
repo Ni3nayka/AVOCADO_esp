@@ -69,7 +69,7 @@ void AVOCADO_esp::setup() {
   #endif
 
   // monitor
-  #ifdef ENABLE_AVOCADO_ESP_WIFI_MONITOR
+  #if defined(ENABLE_AVOCADO_ESP_WIFI_MONITOR) || defined(ENABLE_AVOCADO_ESP_WIFI_GAMEPAD)
   AVOCADO_esp::monitor_setup();
   #endif
 
@@ -88,7 +88,7 @@ void AVOCADO_esp::update() {
   #endif
 
   // monitor
-  #ifdef ENABLE_AVOCADO_ESP_WIFI_MONITOR
+  #if defined(ENABLE_AVOCADO_ESP_WIFI_MONITOR) || defined(ENABLE_AVOCADO_ESP_WIFI_GAMEPAD)
   AVOCADO_esp::monitor_update();
   #endif
   
