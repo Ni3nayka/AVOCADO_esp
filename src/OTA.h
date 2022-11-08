@@ -33,20 +33,24 @@ class OTA {
 };
 
 void OTA::OTA_setup() {
-  Serial.println("Booting");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_NAME, WIFI_PASSWORD);
-  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("Connection Failed! Rebooting...");
-    delay(500);
-    ESP.restart();
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("AVOCADO_lib: Booting");
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(WIFI_NAME, WIFI_PASSWORD);
+    while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+      Serial.println("AVOCADO_lib: Connection Failed! Rebooting...");
+      delay(500);
+      ESP.restart();
+    }
   }
 
   // Port defaults to 8266
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
+  #ifdef DEVICE_NAME
   ArduinoOTA.setHostname(DEVICE_NAME);
+  #endif
 
   // No authentication by default
   #ifdef DEVICE_PASSWORD
@@ -66,16 +70,16 @@ void OTA::OTA_setup() {
     }
 
     // NOTE: if updating FS this would be the place to unmount FS using FS.end()
-    Serial.println("Start updating " + type);
+    Serial.println("AVOCADO_lib: Start updating " + type);
   });
   ArduinoOTA.onEnd([]() {
-    Serial.println("\nEnd");
+    Serial.println("\nAVOCADO_lib: End");
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    Serial.printf("AVOCADO_lib: Progress: %u%%\r", (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
-    Serial.printf("Error[%u]: ", error);
+    Serial.printf("AVOCADO_lib: Error[%u]: ", error);
     if (error == OTA_AUTH_ERROR) {
       Serial.println("Auth Failed");
     } else if (error == OTA_BEGIN_ERROR) {
@@ -89,8 +93,8 @@ void OTA::OTA_setup() {
     }
   });
   ArduinoOTA.begin();
-  Serial.println("Ready");
-  Serial.print("IP address: ");
+  Serial.println("AVOCADO_lib: Ready");
+  Serial.print("AVOCADO_lib: IP address: ");
   Serial.println(WiFi.localIP());  
 }
 
