@@ -21,13 +21,17 @@
 //#define DEVICE_NAME "test_esp8266" 
 //#define DEVICE_PASSWORD "1234"
 
-#include <wifi_boot_esp.h>
+#define ENABLE_AVOCADO_ESP_WIFI_BOOT
+
+#include <AVOCADO_esp.h>
+
+AVOCADO_esp esp;
 
 void setup() {
   Serial.begin(115200);
-  wifi_boot_esp.setup();
+  esp.setup();
 }
 
 void loop() {
-  wifi_boot_esp.update();
+  esp.update();
 }
