@@ -55,6 +55,8 @@ class AVOCADO_esp: public OTA, public AVOCADO_monitor {
 void AVOCADO_esp::setup() {
 
   // general
+  Serial.println();
+  Serial.println();
   Serial.printf("AVOCADO_lib: Connecting to %s ", WIFI_NAME);
   WiFi.begin(WIFI_NAME, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
