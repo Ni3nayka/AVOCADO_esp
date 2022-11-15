@@ -28,7 +28,7 @@
 AVOCADO_esp esp;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200); // not necessary
   esp.setup();
 }
 
