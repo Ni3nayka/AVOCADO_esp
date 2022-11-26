@@ -1,37 +1,39 @@
 /*
-   Write for pack lib AVOCADO_esp:
-   https://github.com/Ni3nayka/AVOCADO_esp
+   Написано для проекта AVOCADO (AVOCADO_esp):
+   https://github.com/Ni3nayka/AVOCADO_esp/releases
 
-   manual:
+   Мануал по проекту:
+   https://docs.google.com/document/d/1Rvoi-yDUz9T8iqtriVZaRBL97akOxsfKGw68NE6AFoM/edit?usp=sharing
+
+   Мануал по прошивке по wifi (сторонний):
    https://wikihandbk.com/wiki/ESP8266:Примеры/Прошивка_ESP8266_методом_OTA
 
-   install python 2.7.7:
+   Установите python 2.7.х:
    https://www.python.org/downloads/release/python-277/
-   or instal from lib folder
+   или установите из папки со скачанной библиотекой
 
-   author: Egor Bakay <egor_bakay@inbox.ru>
-   write:  november 2022
-   modify: november 2022
+   Автор: Бакай Егор <egor_bakay@inbox.ru>
 */
 
-#define WIFI_NAME "test_name"
-#define WIFI_PASSWORD "test_pass"
+#define WIFI_NAME "test_name"                // Имя wifi сети
+#define WIFI_PASSWORD "test_pass"            // Пароль от wifi сети
 
-// uncomment this if you need:
-//#define DEVICE_NAME "test_esp8266" 
-//#define DEVICE_PASSWORD "1234"
+// Расскоментируйте, если хотите это использовать:
+//#define DEVICE_NAME "test_esp8266"         // Имя сетевого устройства (чтобы ваша esp красиво отображалась)
+//#define DEVICE_PASSWORD "1234"             // Пароль при прошивке по wifi
 
-#define ENABLE_AVOCADO_ESP_WIFI_BOOT
+#define ENABLE_AVOCADO_ESP_WIFI_BOOT         // "Включить прошивку по wifi"
 
-#include <AVOCADO_esp.h>
+// ! ВСЕ #define (для библиотеки) ДОЛЖНЫ БЫТЬ НАПИСАНЫ ДО ПОДКЛЮЧЕНИЯ БИБЛИОТЕКИ !
+#include <AVOCADO_esp.h>                     // Подключить библиотеку
 
-AVOCADO_esp esp;
+AVOCADO_esp esp;                             // объявим esp (для использования функционала библиотеки)
 
 void setup() {
-  Serial.begin(115200); // not necessary
-  esp.setup();
+  Serial.begin(115200);                      // Запустим монитор порта (не обязательно для работы)
+  esp.setup();                               // Запустим esp (для подключения к wifi и др.)
 }
 
 void loop() {
-  esp.update();
+  esp.update();                              // Обновить esp (должно быть в рабочем цикле, иначе библиотека не будет работать)
 }
