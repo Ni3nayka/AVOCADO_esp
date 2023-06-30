@@ -2,5 +2,5 @@
 esp lib for Arduino IDE for wifi communication with PC
 
 ### Support board:
-ESP8266
-ESP32
+1) ESP8266
+2) ESP32
