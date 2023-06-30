@@ -10,15 +10,22 @@
 
    author: Egor Bakay <egor_bakay@inbox.ru>
    write:  november 2022
-   modify: november 2022
+   modify: June 2023
 */
 
 #pragma once
 
 #ifdef ENABLE_AVOCADO_ESP_WIFI_BOOT
 
-#include <ESP8266WiFi.h>
-#include <ESP8266mDNS.h>
+#if defined(ESP32)
+  #include <WiFi.h>
+  #include <ESPmDNS.h>
+#endif
+#if defined(ESP8266)
+  #include <ESP8266WiFi.h>
+  #include <ESP8266mDNS.h>
+#endif
+
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
@@ -44,10 +51,10 @@ void OTA::OTA_setup() {
     }
   }
 
-  // Port defaults to 8266
+  // Port defaults to 8266 (esp8266) or 3232 (esp32)
   // ArduinoOTA.setPort(8266);
 
-  // Hostname defaults to esp8266-[ChipID]
+  // Hostname defaults to esp8266-[ChipID] or esp3232-[MAC]
   #ifdef DEVICE_NAME
   ArduinoOTA.setHostname(DEVICE_NAME);
   #endif
