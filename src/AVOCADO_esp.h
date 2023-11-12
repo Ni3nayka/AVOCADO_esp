@@ -42,11 +42,16 @@ class AVOCADO_esp: public OTA, public AVOCADO_monitor {
     // general
     void setup();
     void update();
+
+    // optional for wifi bootload
+    void enable_wifi_boot();
+    void disable_wifi_boot();
     
   private:
     // general
 
     // OTA
+    bool enable_wifi_bootload;
 
     // gamepad
     
@@ -69,6 +74,7 @@ void AVOCADO_esp::setup() {
   #ifdef ENABLE_AVOCADO_ESP_WIFI_BOOT
   AVOCADO_esp::OTA_setup();
   #endif
+  AVOCADO_esp::enable_wifi_bootload = 1;
 
   // monitor
   #if defined(ENABLE_AVOCADO_ESP_WIFI_MONITOR) || defined(ENABLE_AVOCADO_ESP_WIFI_GAMEPAD)
@@ -86,7 +92,9 @@ void AVOCADO_esp::update() {
   
   // OTA
   #ifdef ENABLE_AVOCADO_ESP_WIFI_BOOT
-  AVOCADO_esp::OTA_update();
+  if (AVOCADO_esp::enable_wifi_bootload) {
+    AVOCADO_esp::OTA_update();
+  }
   #endif
 
   // monitor
@@ -100,3 +108,6 @@ void AVOCADO_esp::update() {
   //#endif
   
 }
+
+void AVOCADO_esp::enable_wifi_boot()  { AVOCADO_esp::enable_wifi_bootload = 1; }
+void AVOCADO_esp::disable_wifi_boot() { AVOCADO_esp::enable_wifi_bootload = 0; }

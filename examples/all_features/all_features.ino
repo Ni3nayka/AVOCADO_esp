@@ -37,6 +37,8 @@ AVOCADO_esp esp;
 void setup() {
   Serial.begin(115200);
   esp.setup();
+  //esp.disable_wifi_boot(); 
+  //esp.enable_wifi_boot(); 
 }
 
 void loop() {
